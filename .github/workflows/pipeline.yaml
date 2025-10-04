@@ -1,0 +1,26 @@
+# use 2 space for indentation, dont use tab
+name: CI Pipeline
+# on triggers pipeline whenever push happens on main branch(not any other branch)
+on:
+  push:
+    branches: [main]
+#jobs - group of steps that run together, mulitple actions are executed in sequence.
+#steps - actual instructions to be executed one after another.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
